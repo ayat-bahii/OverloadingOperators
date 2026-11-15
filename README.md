@@ -10,7 +10,7 @@ Most C++ operators can be overloaded to work with user-defined types (classes an
 |---|---|
 | Arithmetic | `+`, `-`, `*`, `/`, `%` |
 | Relational | `==`, `!=`, `<`, `>`, `<=`, `>=` |
-| Logical | `&&`, `||`, `!` |
+| Logical | `&&`, `\|\|`, `!` |
 | Bitwise | `&`, `|`, `^`, `~`, `<<`, `>>` |
 | Assignment | `=`, `+=`, `-=`, `*=`, `/=` |
 | Increment / Decrement | `++`, `--` |
