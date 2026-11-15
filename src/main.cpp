@@ -98,10 +98,16 @@ class Complex {
         }
         
         //postfix
-        Complex & operator++(int){
+        Complex  operator++(int){
             Complex old = *this;
             this->real++;
             this->img++;
+            return old;
+        }
+        Complex  operator--(int){
+            Complex old = *this;
+            this->real--;
+            this->img--;
             return old;
         }
         //prefix
@@ -110,7 +116,11 @@ class Complex {
             this->img++;
             return *this;
         }
-        
+        Complex& operator--(){
+            this->real--;
+            this->img--;
+            return *this;
+        }
 
         friend Complex operator+ (int x,const Complex & c);
         friend Complex operator- (int x,const Complex & c);
@@ -157,4 +167,71 @@ Complex operator% (int x ,const Complex & c){
         cout<<"Can't modulo by ZERO!!"<<"\n";
         return Complex(0,0);
     }
+}
+
+
+
+int main() {
+Complex c1(10, 5);
+Complex c2(3, 2);
+
+cout << "===== Original Objects ====="<<"\n";
+cout << "c1 = ";
+c1.getComplex();
+
+cout << "c2 = ";
+c2.getComplex();
+
+// 1. Add
+cout << "===== Add (+) ====="<<"\n";
+(c1 + c2).getComplex();
+(c1 + 2).getComplex();
+(5 + c1).getComplex();
+
+//2.Sub
+cout << "===== Sub (-) ====="<<"\n";
+(c1 - c2).getComplex();
+(c1 - 2).getComplex();
+(5 - c1).getComplex();
+
+//3.Mult
+cout << "===== Mult (*) ====="<<"\n";
+(c1 * c2).getComplex();
+(c1 * 2).getComplex();
+(5 * c1).getComplex();
+
+//4.Divide
+cout << "===== Divide (/) ====="<<"\n";
+(c1 / c2).getComplex();
+(c1 / 2).getComplex();
+(5 / c1).getComplex();
+
+//5.MOD
+cout << "===== MOD (%) ====="<<"\n";
+(c1 % c2).getComplex();
+(c1 % 2).getComplex();
+(5 % c1).getComplex();
+
+//6.c++
+cout << "===== postfix (c++) ====="<<"\n";
+Complex c3(3,9);
+c3++;
+c3.getComplex();
+//7.c--
+cout << "===== postfix (c--) ====="<<"\n";
+c3--;
+c3.getComplex();
+//8.++c
+cout << "===== prefix (++c) ====="<<"\n";
+++c3;
+c3.getComplex();
+//8.--c
+cout << "===== prefix (--c) ====="<<"\n";
+--c3;
+c3.getComplex();
+
+
+
+
+return 0;
 }
