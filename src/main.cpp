@@ -121,12 +121,141 @@ class Complex {
             this->img--;
             return *this;
         }
+        Complex& operator=(Complex& c){
+            this->real=c.real;
+            this->img=c.img;
+            return *this;
+        }
+        Complex& operator=(int x){
+            this->real=x;
+            this->img=0;
+            return *this;
+        }
+        Complex& operator+=(Complex& c){
+            this->real=this->real+c.real;
+            this->img=this->img+c.img;
+            return *this;
+        }
+        Complex& operator+=(int x){
+            this->real=this->real+x;
+            this->img=this->img+0;
+            return *this;
+        }
+        Complex& operator-=(Complex& c){
+            this->real-=c.real;
+            this->img-=c.img;
+            return *this;
+        }
+        Complex& operator-=(int x){
+            this->real-=x;
+            this->img=-this->img;
+            return *this;
+        }
+        Complex& operator*=(Complex& c){
+            this->real= (this->real*c.real) - (this->img*c.img);
+            this->img=  (this->real*c.img) +   (this->img*c.real);
+            return *this;
+        }
+        Complex& operator/=(Complex& c){
+            double maqam = (this->real*c.real)+(this->img*c.img);
+            if(maqam!=0){
+                this->real = ((this->real * c.real) + (this->img * c.img)) / maqam;
+                this->img  = ((this->img * c.real) - (this->real * c.img)) / maqam;
+                return *this;
+            }else{
+                cout<<"Can't devision by Zero!!"<<"\n";
+            }
+        }
+        
+        bool operator==(Complex& c){
+            if((this->real == c.real)&&(this->img == c.img)){
+                return true;
+            }
+            return false;
+        }
+
+        bool operator!=(Complex& c){
+            if((this->real == c.real)&&(this->img == c.img)){
+                return false;
+            }
+            return true;
+        }
+        
+        bool operator<(Complex& c){
+            if((this->real < c.real)&&(this->img < c.img)){
+                return true;
+            }
+            return false;
+        }
+        bool operator>(Complex& c){
+            if((this->real > c.real)&&(this->img > c.img)){
+                return true;
+            }
+            return false;
+        }
+        bool operator<=(Complex& c){
+            if((this->real <= c.real)&&(this->img <= c.img)){
+                return true;
+            }
+            return false;
+        }
+        bool operator>=(Complex& c){
+            if((this->real >= c.real)&&(this->img >= c.img)){
+                return true;
+            }
+            return false;
+        }
+        
+        bool operator&&(Complex& c){
+            bool flag=false;
+            if((this->real==c.real) &&(this->img==c.img)){
+                flag=true;
+            }
+            return flag;
+        }
+
+        bool operator||(Complex& c){
+            bool flag=false;
+            if((this->real==c.real)||(this->img==c.img)){
+                flag=true;
+            }
+            return flag;
+        }
+        
+        Complex& operator()(int r,int i){//b3ml new real w img bb3thom
+            this->real=r;
+            this->img=i;
+            return *this;
+        }
+
+        bool operator!(){
+            bool flag=false;
+            if(this->real==0 && this->img==0){
+                flag=true;
+            }
+            return flag;
+        }
+
+        int operator[] (int index){
+            if(index==0){
+                return this->real;
+            }
+            else if(index==1){
+                return this->img;
+            }
+            else{
+                cout<<"Error Index";
+            }
+        }
+
 
         friend Complex operator+ (int x,const Complex & c);
         friend Complex operator- (int x,const Complex & c);
         friend Complex operator* (int x,const Complex & c);
         friend Complex operator/ (int x,const Complex & c);
         friend Complex operator% (int x,const Complex & c);
+        friend std::ostream& operator<<(std::ostream& out,const Complex &c);
+        friend std::istream& operator>>(std::istream& in,const Complex &c);
 };
 
 //Standlone Function
@@ -169,6 +298,30 @@ Complex operator% (int x ,const Complex & c){
     }
 }
 
+std::ostream& operator<<(std::ostream& out,const Complex &c){
+    if(c.real!=0){
+        out<<c.real;
+    }
+    if(c.img!=0){
+        if(c.img>0){
+            out<<"+"<<c.img<<"j"<<endl;
+        }
+        else{
+            out<<c.img<<"j";
+        }
+    }
+    return out;
+}
+
+std::istream& operator>>(std::istream& in,const Complex &c){
+    if(c.real!=0){
+        in>>c.real;
+    }
+    if(c.img!=0){
+       in>>c.img;
+    }
+    return in;
+}
 
 
 int main() {
